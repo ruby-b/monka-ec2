@@ -1,19 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+<h2 class="sub-header">Book</h2>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
+<dl>
+  <dt>Title:</dt>
+  <dd><%= @book.title %></dd>
 
-<p>
-  <strong>Published on:</strong>
-  <%= @book.published_on %>
-</p>
+  <dt>Author:</dt>
+  <dd><%= @book.author %></dd>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+  <dt>Published on:</dt>
+  <dd><%= @book.published_on %></dd>
+</dl>
+
+<%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-default' %>
+<%= link_to 'Back', books_path, class: 'btn btn-default' %>
