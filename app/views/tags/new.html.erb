@@ -1,5 +1,5 @@
-<h1>New Tag</h1>
+<h2>New Tag</h2>
 
-<%= render 'form', tag: @tag %>
+<%= render 'form', tag: @tag, title: 'Create' %>
 
-<%= link_to 'Back', tags_path %>
+<%= link_to 'Back', tags_path, class: 'btn btn-default' %>

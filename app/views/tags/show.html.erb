@@ -1,9 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @tag.name %>
-</p>
+<h2 class="sub-header">Tag</h2>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @tag.name %></dd>
+</dl>
+
+<%= link_to 'Edit', edit_tag_path(@tag), class: 'btn btn-default' %>
+<%= link_to 'Back', tags_path, class: 'btn btn-default' %>

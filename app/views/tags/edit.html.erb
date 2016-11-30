@@ -1,6 +1,6 @@
-<h1>Editing Tag</h1>
+<h2>Editing Tag</h2>
 
-<%= render 'form', tag: @tag %>
+<%= render 'form', tag: @tag, title: 'Update' %>
 
-<%= link_to 'Show', @tag %> |
-<%= link_to 'Back', tags_path %>
+<%= link_to 'Show', @tag, class: 'btn btn-default' %>
+<%= link_to 'Back', tags_path, class: 'btn btn-default' %>
