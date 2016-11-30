@@ -1,6 +1,5 @@
-<h1>Editing Tagging</h1>
+<h2>Editing Tagging</h2>
 
-<%= render 'form', tagging: @tagging %>
+<%= render 'form', tagging: @tagging, title: 'Update' %>
 
-<%= link_to 'Show', @tagging %> |
-<%= link_to 'Back', taggings_path %>
+<%= link_to 'Back', book_path(@book), class: 'btn btn-default' %>

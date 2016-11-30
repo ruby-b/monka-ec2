@@ -20,3 +20,18 @@
 
 <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-default' %>
 <%= link_to 'Back', books_path, class: 'btn btn-default' %>
+
+<hr>
+
+<dl>
+  <dt>Tags:</dt>
+  <dd>
+    <% @book.taggings.each do |tagging| %>
+      <span class="btn btn-info"><%= tagging.tag.name %></span>
+      <%= link_to 'Edit', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btn-default' %>
+      <%= link_to 'Delete', book_tagging_path(@book, tagging), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+    <% end %>
+  </dd>
+</dl>
+
+<%= link_to 'New Tagging', new_book_tagging_path(@book), class: 'btn btn-default' %>

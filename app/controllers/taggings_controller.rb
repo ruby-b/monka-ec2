@@ -1,16 +1,6 @@
 class TaggingsController < ApplicationController
-  before_action :set_tagging, only: [:show, :edit, :update, :destroy]
-
-  # GET /taggings
-  # GET /taggings.json
-  def index
-    @taggings = Tagging.all
-  end
-
-  # GET /taggings/1
-  # GET /taggings/1.json
-  def show
-  end
+  before_action :set_tagging, only: [:edit, :update, :destroy]
+  before_action :set_book
 
   # GET /taggings/new
   def new
@@ -24,11 +14,12 @@ class TaggingsController < ApplicationController
   # POST /taggings
   # POST /taggings.json
   def create
-    @tagging = Tagging.new(tagging_params)
+    @tagging         = Tagging.new(tagging_params)
+    @tagging.book_id = @book.id
 
     respond_to do |format|
       if @tagging.save
-        format.html { redirect_to @tagging, notice: 'Tagging was successfully created.' }
+        format.html { redirect_to @book, notice: 'Tagging was successfully created.' }
         format.json { render :show, status: :created, location: @tagging }
       else
         format.html { render :new }
@@ -42,7 +33,7 @@ class TaggingsController < ApplicationController
   def update
     respond_to do |format|
       if @tagging.update(tagging_params)
-        format.html { redirect_to @tagging, notice: 'Tagging was successfully updated.' }
+        format.html { redirect_to @book, notice: 'Tagging was successfully updated.' }
         format.json { render :show, status: :ok, location: @tagging }
       else
         format.html { render :edit }
@@ -56,7 +47,7 @@ class TaggingsController < ApplicationController
   def destroy
     @tagging.destroy
     respond_to do |format|
-      format.html { redirect_to taggings_url, notice: 'Tagging was successfully destroyed.' }
+      format.html { redirect_to @book, notice: 'Tagging was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +56,10 @@ class TaggingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tagging
       @tagging = Tagging.find(params[:id])
+    end
+
+    def set_book
+      @book = Book.find(params[:book_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

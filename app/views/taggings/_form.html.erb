@@ -1,4 +1,4 @@
-<%= form_for(tagging) do |f| %>
+<%= form_for([@book, tagging]) do |f| %>
   <% if tagging.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(tagging.errors.count, "error") %> prohibited this tagging from being saved:</h2>
@@ -11,17 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :book_id %>
-    <%= f.text_field :book_id %>
   </div>
 
-  <div class="field">
+  <dl>
+    <dt>Title:</dt>
+    <dd><%= @book.title %></dd>
+
+    <dt>Author:</dt>
+    <dd><%= @book.author %></dd>
+
+    <dt>Published on:</dt>
+    <dd><%= @book.published_on %></dd>
+  </dl>
+
+  <div class="form-group">
     <%= f.label :tag_id %>
-    <%= f.text_field :tag_id %>
+    <%= f.select :tag_id, Tag.all.map{|t| [t.name, t.id]}, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit title, class: "btn btn-default" %>
   </div>
 <% end %>
