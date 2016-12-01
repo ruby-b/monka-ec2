@@ -21,9 +21,11 @@
           <%= link_to 'Monka', root_path, class: "navbar-brand" %>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign out</a></li>
-          </ul>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          <% end %>
         </div>
       </div>
     </nav>
@@ -31,10 +33,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="<%= active_class('books') %>"><%= link_to 'Books', books_path %></li>
-            <li class="<%= active_class('tags') %>"><%= link_to 'Tags', tags_path %></li>
-          </ul>
+          <% if user_signed_in? %>
+            <ul class="nav nav-sidebar">
+              <li class="<%= active_class('books') %>"><%= link_to 'Books', books_path %></li>
+              <li class="<%= active_class('tags') %>"><%= link_to 'Tags', tags_path %></li>
+              <li class="<%= active_class('users') %>"><%= link_to 'Users', users_path %></li>
+            </ul>
+          <% end %>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 

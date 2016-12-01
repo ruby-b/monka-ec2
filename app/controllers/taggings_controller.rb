@@ -1,4 +1,5 @@
 class TaggingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_tagging, only: [:edit, :update, :destroy]
   before_action :set_book
 

@@ -26,3 +26,8 @@ CSV.foreach('db/books.csv', headers: :first_row) do |row|
     tagging = Tagging.find_or_create_by(book_id: book.id, tag_id: tag.id)
   end
 end
+
+admin = User.where(email: 'test@example.com')
+unless admin.present?
+  User.create(name: 'Admin', email: 'test@example.com', password: 'monka_project', password_confirmation: 'monka_project')
+end

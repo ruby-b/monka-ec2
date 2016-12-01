@@ -1,0 +1,16 @@
+<% if notice %>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h2 class="sub-header">User</h2>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @user.name %></dd>
+</dl>
+
+<%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
+<%= link_to 'Back', users_path, class: 'btn btn-default' %>
