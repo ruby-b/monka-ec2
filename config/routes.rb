@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'products/index'
+
   devise_for :users
-  root to: 'books#index'
+  root to: 'products#index'
 
   resources :users
   resources :tags
