@@ -26,6 +26,11 @@
     <%= f.date_select :published_on %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :showing %>する
+    <%= f.check_box :showing %>
+  </div>
+
   <div class="actions">
     <%= f.submit title, class: "btn btn-default" %>
   </div>

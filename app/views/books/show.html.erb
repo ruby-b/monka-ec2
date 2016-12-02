@@ -19,8 +19,14 @@
 
 <p>
   <strong>出版日：</strong>
-  <%= @book.published_on %>
+  <%= @book.published_on.try(:strftime, '%Y年%m月') %>
 </p>
+
+<p>
+  <strong>発売：</strong>
+  <%= @book.showing? ? '可能' : '不可' %>
+</p>
+
 
 <%= link_to '編集', edit_book_path(@book), class: 'btn btn-default' %>
 <%= link_to '戻る', books_path, class: 'btn btn-default' %>

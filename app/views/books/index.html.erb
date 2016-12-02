@@ -13,6 +13,7 @@
         <th>タイトル</th>
         <th>著者</th>
         <th>出版年月</th>
+        <th>発売</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -21,7 +22,8 @@
         <tr>
           <td><%= book.title %></td>
           <td><%= book.author %></td>
-          <td><%= book.published_on.strftime('%Y年%m月') %></td>
+          <td><%= book.published_on.try(:strftime, '%Y年%m月') %></td>
+          <td><%= book.showing? ? '可能' : '不可' %></td>
           <td><%= link_to '詳細', book %></td>
           <td><%= link_to '編集', edit_book_path(book) %></td>
           <td><%= link_to '削除', book, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>

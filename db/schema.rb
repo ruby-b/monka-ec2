@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201050034) do
+ActiveRecord::Schema.define(version: 20161202082818) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
     t.date     "published_on"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "showing",      default: false
   end
 
   create_table "taggings", force: :cascade do |t|
