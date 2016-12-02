@@ -24,7 +24,7 @@ RSpec.describe TagsController, type: :controller do
   # Tag. As you add validations to Tag, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: 'スポーツ' }
   }
 
   let(:invalid_attributes) {
@@ -36,11 +36,14 @@ RSpec.describe TagsController, type: :controller do
   # TagsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:admin_user) { User.where(role: 'admin').first }
+  before(:each) { sign_in admin_user }
+
   describe "GET #index" do
     it "assigns all tags as @tags" do
       tag = Tag.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:tags)).to eq([tag])
+      expect(assigns(:tags).count).to eq(6)
     end
   end
 
@@ -75,7 +78,7 @@ RSpec.describe TagsController, type: :controller do
 
       it "redirects to the created tag" do
         post :create, params: {tag: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Tag.last)
+        expect(response).to redirect_to(tags_path)
       end
     end
 
@@ -114,7 +117,7 @@ RSpec.describe TagsController, type: :controller do
       it "redirects to the tag" do
         tag = Tag.create! valid_attributes
         put :update, params: {id: tag.to_param, tag: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(tag)
+        expect(response).to redirect_to(tags_path)
       end
     end
 

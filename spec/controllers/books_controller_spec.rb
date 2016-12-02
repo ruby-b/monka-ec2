@@ -19,12 +19,11 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe BooksController, type: :controller do
-
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'aozora bunko', author: 'volunteer', published_on: Time.zone.now, showing: true }
   }
 
   let(:invalid_attributes) {
@@ -36,11 +35,14 @@ RSpec.describe BooksController, type: :controller do
   # BooksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:admin_user) { User.where(role: 'admin').first }
+  before(:each) { sign_in admin_user }
+
   describe "GET #index" do
     it "assigns all books as @books" do
       book = Book.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:books)).to eq([book])
+      expect(assigns(:books).count).to eq(7)
     end
   end
 

@@ -23,8 +23,11 @@ RSpec.describe TaggingsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Tagging. As you add validations to Tagging, be sure to
   # adjust the attributes here as well.
+  let(:book) { Book.first }
+  let(:tag) { Tag.first }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { book_id: book.id, tag_id: tag.id }
   }
 
   let(:invalid_attributes) {
@@ -36,9 +39,12 @@ RSpec.describe TaggingsController, type: :controller do
   # TaggingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:admin_user) { User.where(role: 'admin').first }
+  before(:each) { sign_in admin_user }
+
   describe "GET #new" do
     it "assigns a new tagging as @tagging" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { book_id: book.id }, session: valid_session
       expect(assigns(:tagging)).to be_a_new(Tagging)
     end
   end
@@ -46,7 +52,7 @@ RSpec.describe TaggingsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested tagging as @tagging" do
       tagging = Tagging.create! valid_attributes
-      get :edit, params: {id: tagging.to_param}, session: valid_session
+      get :edit, params: {id: tagging.to_param, book_id: book.id }, session: valid_session
       expect(assigns(:tagging)).to eq(tagging)
     end
   end
@@ -55,30 +61,30 @@ RSpec.describe TaggingsController, type: :controller do
     context "with valid params" do
       it "creates a new Tagging" do
         expect {
-          post :create, params: {tagging: valid_attributes}, session: valid_session
+          post :create, params: {tagging: valid_attributes, book_id: book.id}, session: valid_session
         }.to change(Tagging, :count).by(1)
       end
 
       it "assigns a newly created tagging as @tagging" do
-        post :create, params: {tagging: valid_attributes}, session: valid_session
+        post :create, params: {tagging: valid_attributes, book_id: book.id}, session: valid_session
         expect(assigns(:tagging)).to be_a(Tagging)
         expect(assigns(:tagging)).to be_persisted
       end
 
       it "redirects to the created tagging" do
-        post :create, params: {tagging: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Tagging.last)
+        post :create, params: {tagging: valid_attributes, book_id: book.id}, session: valid_session
+        expect(response).to redirect_to(book_path(book))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved tagging as @tagging" do
-        post :create, params: {tagging: invalid_attributes}, session: valid_session
+        post :create, params: {tagging: invalid_attributes, book_id: book.id}, session: valid_session
         expect(assigns(:tagging)).to be_a_new(Tagging)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: {tagging: invalid_attributes}, session: valid_session
+        post :create, params: {tagging: invalid_attributes, book_id: book.id}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -99,14 +105,14 @@ RSpec.describe TaggingsController, type: :controller do
 
       it "assigns the requested tagging as @tagging" do
         tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
+        put :update, params: {id: tagging.to_param, tagging: valid_attributes, book_id: book.id}, session: valid_session
         expect(assigns(:tagging)).to eq(tagging)
       end
 
       it "redirects to the tagging" do
         tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(tagging)
+        put :update, params: {id: tagging.to_param, tagging: valid_attributes, book_id: book.id}, session: valid_session
+        expect(response).to redirect_to(book_path(book))
       end
     end
 
@@ -129,14 +135,14 @@ RSpec.describe TaggingsController, type: :controller do
     it "destroys the requested tagging" do
       tagging = Tagging.create! valid_attributes
       expect {
-        delete :destroy, params: {id: tagging.to_param}, session: valid_session
+        delete :destroy, params: {id: tagging.to_param, book_id: book.id}, session: valid_session
       }.to change(Tagging, :count).by(-1)
     end
 
     it "redirects to the taggings list" do
       tagging = Tagging.create! valid_attributes
-      delete :destroy, params: {id: tagging.to_param}, session: valid_session
-      expect(response).to redirect_to(taggings_url)
+      delete :destroy, params: {id: tagging.to_param, book_id: book.id}, session: valid_session
+      expect(response).to redirect_to(book_url(book))
     end
   end
 
