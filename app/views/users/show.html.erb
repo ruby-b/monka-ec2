@@ -19,7 +19,7 @@
 
 <p>
   <strong>役割：</strong>
-  <%= @user.role %>
+  <%= t(@user.role) %>
 </p>
 
 <%= link_to '編集', edit_user_path(@user), class: 'btn btn-default' %>

@@ -21,7 +21,7 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
-          <td><%= user.role %></td>
+          <td><%= t(user.role) %></td>
           <td><%= link_to '詳細', user %></td>
           <td><%= link_to '編集', edit_user_path(user) %></td>
           <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>

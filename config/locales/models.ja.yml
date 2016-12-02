@@ -1,4 +1,6 @@
 ja:
+  admin: '管理者'
+  general: '一般'
   activerecord:
     attributes:
       user:

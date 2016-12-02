@@ -40,9 +40,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
+
   def update
+    _user_params = user_params
+    _user_params.delete(:password) if user_params[:password].blank?
+    _user_params.delete(:password_confirmation) if user_params[:password_confirmation].blank?
+
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(_user_params)
         bypass_sign_in(@user)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -71,6 +76,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
     end
 end
