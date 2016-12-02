@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        role: 役割
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+      book:
+        title: タイトル
+        author: 著者
+        published_on: 出版日
+      tag:
+        name: タグ名
+      tagging:
+        book_id: 本
+        tag_id: タグ
+

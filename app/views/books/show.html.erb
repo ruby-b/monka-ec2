@@ -7,31 +7,35 @@
 
 <h2 class="sub-header">Book</h2>
 
-<dl>
-  <dt>Title:</dt>
-  <dd><%= @book.title %></dd>
+<p>
+  <strong>タイトル：</strong>
+  <%= @book.title %>
+</p>
 
-  <dt>Author:</dt>
-  <dd><%= @book.author %></dd>
+<p>
+  <strong>著書：</strong>
+  <%= @book.author %>
+</p>
 
-  <dt>Published on:</dt>
-  <dd><%= @book.published_on %></dd>
-</dl>
+<p>
+  <strong>出版日：</strong>
+  <%= @book.published_on %>
+</p>
 
-<%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-default' %>
-<%= link_to 'Back', books_path, class: 'btn btn-default' %>
+<%= link_to '編集', edit_book_path(@book), class: 'btn btn-default' %>
+<%= link_to '戻る', books_path, class: 'btn btn-default' %>
 
 <hr>
 
-<dl>
-  <dt>Tags:</dt>
-  <dd>
-    <% @book.taggings.each do |tagging| %>
+<p><strong>タグ</strong></p>
+<ul class="list-inline">
+  <% @book.taggings.each do |tagging| %>
+    <li>
       <span class="btn btn-info"><%= tagging.tag.name %></span>
-      <%= link_to 'Edit', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btn-default' %>
-      <%= link_to 'Delete', book_tagging_path(@book, tagging), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
-    <% end %>
-  </dd>
-</dl>
+      <%= link_to '編集', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btn-default' %>
+      <%= link_to '削除', book_tagging_path(@book, tagging), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+    </li>
+  <% end %>
+</ul>
 
-<%= link_to 'New Tagging', new_book_tagging_path(@book), class: 'btn btn-default' %>
+<%= link_to '新規登録', new_book_tagging_path(@book), class: 'btn btn-default' %>

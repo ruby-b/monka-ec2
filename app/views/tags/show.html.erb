@@ -7,10 +7,10 @@
 
 <h2 class="sub-header">Tag</h2>
 
-<dl>
-  <dt>Name:</dt>
-  <dd><%= @tag.name %></dd>
-</dl>
+<p>
+  <strong>タグ名：</strong>
+  <%= @tag.name %>
+</p>
 
 <%= link_to 'Edit', edit_tag_path(@tag), class: 'btn btn-default' %>
 <%= link_to 'Back', tags_path, class: 'btn btn-default' %>

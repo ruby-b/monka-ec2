@@ -11,20 +11,25 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :book_id %>
-  </div>
+  <h2 class="sub-header">Book</h2>
 
-  <dl>
-    <dt>Title:</dt>
-    <dd><%= @book.title %></dd>
+  <p>
+    <strong>タイトル：</strong>
+    <%= @book.title %>
+  </p>
 
-    <dt>Author:</dt>
-    <dd><%= @book.author %></dd>
+  <p>
+    <strong>著書：</strong>
+    <%= @book.author %>
+  </p>
 
-    <dt>Published on:</dt>
-    <dd><%= @book.published_on %></dd>
-  </dl>
+  <p>
+    <strong>出版日：</strong>
+    <%= @book.published_on %>
+  </p>
+
+
+  <hr>
 
   <div class="form-group">
     <%= f.label :tag_id %>
@@ -35,3 +40,5 @@
     <%= f.submit title, class: "btn btn-default" %>
   </div>
 <% end %>
+
+<br />

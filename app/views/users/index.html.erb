@@ -10,9 +10,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th>役割</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -22,9 +22,9 @@
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '詳細', user %></td>
+          <td><%= link_to '編集', edit_user_path(user) %></td>
+          <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -33,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path, class: 'btn btn-default' %>
+<%= link_to '新規登録', new_user_path, class: 'btn btn-default' %>

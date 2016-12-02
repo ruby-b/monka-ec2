@@ -7,10 +7,20 @@
 
 <h2 class="sub-header">User</h2>
 
-<dl>
-  <dt>Name:</dt>
-  <dd><%= @user.name %></dd>
-</dl>
+<p>
+  <strong>名前：</strong>
+  <%= @user.name %>
+</p>
 
-<%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
-<%= link_to 'Back', users_path, class: 'btn btn-default' %>
+<p>
+  <strong>メールアドレス：</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>役割：</strong>
+  <%= @user.role %>
+</p>
+
+<%= link_to '編集', edit_user_path(@user), class: 'btn btn-default' %>
+<%= link_to '戻る', users_path, class: 'btn btn-default' %>
