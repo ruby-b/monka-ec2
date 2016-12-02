@@ -36,22 +36,6 @@ RSpec.describe TaggingsController, type: :controller do
   # TaggingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all taggings as @taggings" do
-      tagging = Tagging.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:taggings)).to eq([tagging])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested tagging as @tagging" do
-      tagging = Tagging.create! valid_attributes
-      get :show, params: {id: tagging.to_param}, session: valid_session
-      expect(assigns(:tagging)).to eq(tagging)
-    end
-  end
-
   describe "GET #new" do
     it "assigns a new tagging as @tagging" do
       get :new, params: {}, session: valid_session
