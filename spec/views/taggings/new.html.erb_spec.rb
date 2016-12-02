@@ -1,21 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "taggings/new", type: :view do
+  let(:book) { Book.first }
+  let(:tag) { Tag.first }
+
   before(:each) do
     assign(:tagging, Tagging.new(
-      :book => nil,
-      :tag => nil
-    ))
+      :book => book,
+      :tag => tag
+                                 ))
+    @book = assign(:book, book)
   end
 
   it "renders new tagging form" do
     render
 
-    assert_select "form[action=?][method=?]", taggings_path, "post" do
+    assert_select "form[action=?][method=?]", book_taggings_path(@book), "post" do
 
-      assert_select "input#tagging_book_id[name=?]", "tagging[book_id]"
-
-      assert_select "input#tagging_tag_id[name=?]", "tagging[tag_id]"
+      assert_select "select#tagging_tag_id[name=?]", "tagging[tag_id]"
     end
   end
 end
