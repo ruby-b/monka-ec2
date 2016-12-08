@@ -1,7 +1,7 @@
-title,author,published_on,tag_name1,tag_name2,showing
-徒然草,吉田兼好,1331-09-01,文学・小説,文庫,false
-吾輩は猫である,夏目漱石,1905-08-01,文学・小説,文庫,false
-怪人二十面相,江戸川乱歩,1936-01-01,文学・小説,ハードカバー,false
-Rubyを作ってみた話,Matz,1995-12-01,科学・テクノロジー,,true
-楽しいRailsの使い方,DHH,2004-07-01,科学・テクノロジー,,true
-Rubyist Magazine,日本Rubyの会,2004-09-01,科学・テクノロジー,雑誌,true
+title,author,published_on,tag_name1,tag_name2,showing,price
+徒然草,吉田兼好,1331-09-01,文学・小説,文庫,false,3000
+吾輩は猫である,夏目漱石,1905-08-01,文学・小説,文庫,false,5000
+怪人二十面相,江戸川乱歩,1936-01-01,文学・小説,ハードカバー,false,3000
+Rubyを作ってみた話,Matz,1995-12-01,科学・テクノロジー,,true,2500
+楽しいRailsの使い方,DHH,2004-07-01,科学・テクノロジー,,true,8000
+Rubyist Magazine,日本Rubyの会,2004-09-01,科学・テクノロジー,雑誌,true,750

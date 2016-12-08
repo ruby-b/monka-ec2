@@ -23,10 +23,14 @@
 </p>
 
 <p>
+  <strong>価格：</strong>
+  <%= number_to_currency(@book.try(:price), precision: 0, unit: "円") %>
+</p>
+
+<p>
   <strong>発売：</strong>
   <%= @book.showing? ? '可能' : '不可' %>
 </p>
-
 
 <%= link_to '編集', edit_book_path(@book), class: 'btn btn-default' %>
 <%= link_to '戻る', books_path, class: 'btn btn-default' %>

@@ -10,6 +10,7 @@
       <h3><%= book.title %></h3>
       <p><%= book.author %></p>
       <p><%= book.published_on %></p>
+      <p><%= number_to_currency(book.try(:price), precision: 0, unit: "円") %></p>
     <% end %>
   </div>
 </div>

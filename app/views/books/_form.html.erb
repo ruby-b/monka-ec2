@@ -27,6 +27,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :price %>
+    <%= f.text_field :price, class: "form-control", placeholder: '半角数字' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :showing %>する
     <%= f.check_box :showing %>
   </div>
