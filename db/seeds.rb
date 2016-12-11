@@ -12,7 +12,7 @@ CSV.foreach('db/tags.csv', headers: :first_row) do |row|
 end
 
 CSV.foreach('db/books.csv', headers: :first_row) do |row|
-  book              = Book.find_or_create_by(title: row['title'], author: row['author'], price: row['price'], showing: row['showing'])
+  book              = Book.find_or_create_by(title: row['title'], author: row['author'], price: row['price'])
   book.published_on = Date.parse(row['published_on'])
   book.save
 
