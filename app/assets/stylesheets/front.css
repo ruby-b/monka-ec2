@@ -11,6 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  *= require bootstrap.min
- *= require_directory ./application
+ *= require_directory ./front
  *= require_self
  */
