@@ -30,10 +30,6 @@ RSpec.describe TaggingsController, type: :controller do
     { book_id: book.id, tag_id: tag.id }
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TaggingsController. Be sure to keep this updated too.
@@ -76,31 +72,20 @@ RSpec.describe TaggingsController, type: :controller do
         expect(response).to redirect_to(book_path(book))
       end
     end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved tagging as @tagging" do
-        post :create, params: {tagging: invalid_attributes, book_id: book.id}, session: valid_session
-        expect(assigns(:tagging)).to be_a_new(Tagging)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {tagging: invalid_attributes, book_id: book.id}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
   end
 
   describe "PUT #update" do
     context "with valid params" do
+      let(:new_tag) { Tag.create(name: '音楽') }
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { tag_id: new_tag.id }
       }
 
       it "updates the requested tagging" do
         tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: new_attributes}, session: valid_session
+        put :update, params: {id: tagging.to_param, tagging: new_attributes, book_id: book.id}, session: valid_session
         tagging.reload
-        skip("Add assertions for updated state")
+        expect(tagging.tag_id).to eq new_attributes[:tag_id]
       end
 
       it "assigns the requested tagging as @tagging" do
@@ -113,20 +98,6 @@ RSpec.describe TaggingsController, type: :controller do
         tagging = Tagging.create! valid_attributes
         put :update, params: {id: tagging.to_param, tagging: valid_attributes, book_id: book.id}, session: valid_session
         expect(response).to redirect_to(book_path(book))
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the tagging as @tagging" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: invalid_attributes}, session: valid_session
-        expect(assigns(:tagging)).to eq(tagging)
-      end
-
-      it "re-renders the 'edit' template" do
-        tagging = Tagging.create! valid_attributes
-        put :update, params: {id: tagging.to_param, tagging: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
