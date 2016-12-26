@@ -1,0 +1,49 @@
+<%= form_for(music) do |f| %>
+  <% if music.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(music.errors.count, "error") %> prohibited this music from being saved:</h2>
+
+      <ul>
+      <% music.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :author %>
+    <%= f.text_field :author, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :published_on %>
+    <%= f.date_select :published_on %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price %>
+    <%= f.text_field :price, class: "form-control", placeholder: '半角数字' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :play_time %>
+    <%= f.text_field :play_time, class: "form-control", placeholder: '半角数字' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :showing %>する
+    <%= f.check_box :showing %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit title, class: "btn btn-default" %>
+  </div>
+<% end %>
+
+<br />

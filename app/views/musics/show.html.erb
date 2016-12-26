@@ -1,0 +1,43 @@
+<% if notice %>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<h2 class="sub-header">Music</h2>
+
+<p>
+  <strong>タイトル：</strong>
+  <%= @music.title %>
+</p>
+
+<p>
+  <strong>アーティスト：</strong>
+  <%= @music.author %>
+</p>
+
+<p>
+  <strong>発売日：</strong>
+  <%= @music.published_on.try(:strftime, '%Y年%m月') %>
+</p>
+
+<p>
+  <strong>価格：</strong>
+  <%= number_to_currency(@music.try(:price), precision: 0, unit: "円") %>
+</p>
+
+<p>
+  <strong>再生時間：</strong>
+  <%= @music.play_time %> 分
+</p>
+
+<p>
+  <strong>発売：</strong>
+  <%= @music.showing? ? '可能' : '不可' %>
+</p>
+
+<%= link_to '編集', edit_music_path(@music), class: 'btn btn-default' %>
+<%= link_to '戻る', musics_path, class: 'btn btn-default' %>
+
+<hr>
