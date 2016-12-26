@@ -1,6 +1,18 @@
 # README
 
-### Productƒ‚ƒfƒ‹‚Ìì¬
+Setup
+
+```
+$ bundle install
+$ rails db:migrate
+$ rails db:seed
+$ RAILS_ENV=test rails db:migrate
+$ RAILS_ENV=test rails db:seed
+```
+
+# README
+
+### Productãƒ¢ãƒ‡ãƒ«ã®ä½œæˆ
 
 `rails g model product type:string title:string author:string published_on:date showing:boolean price:integer`
 
@@ -10,9 +22,11 @@
     invoke    rspec
     create    spec/models/product_spec.rb
 
-### booksËproducts‚Ö‚Ìƒf[ƒ^ˆÚsˆ—
+up/downã«åˆ†ã‘ã¦è¨˜è¼‰ã™ã‚‹
 
-20161221002055_create_products.rb‚Éƒf[ƒ^ˆÚsˆ—‚ğ‹Lq
+### booksâ‡’productsã¸ã®ãƒ‡ãƒ¼ã‚¿ç§»è¡Œå‡¦ç†
+
+20161221002055_create_products.rbã«ãƒ‡ãƒ¼ã‚¿ç§»è¡Œå‡¦ç†ã‚’è¨˜è¿°
 
     books = Book.all
     books.each do |book|
@@ -21,34 +35,36 @@
       product.save
     end
 
-### booksƒe[ƒuƒ‹íœ
+### booksãƒ†ãƒ¼ãƒ–ãƒ«å‰Šé™¤
 
 `rails g migration drop_table_books`
 
     invoke  active_record
     create  db/migrate/20161221002132_drop_table_books.rb
 
-20161221002132_drop_table_books.rb‚Éƒe[ƒuƒ‹íœˆ—‚ğ‹Lq
+20161221002132_drop_table_books.rbã«ãƒ†ãƒ¼ãƒ–ãƒ«å‰Šé™¤å‡¦ç†ã‚’è¨˜è¿°
 
     def change
       drop_table :books
     end
 
-¦changeƒƒ\ƒbƒh‚É‹Lq‚µ‚½ê‡Arollback‚·‚é‚ÆƒGƒ‰[‚É‚È‚éBup/down‚É•ª‚¯‚Ä‹LÚ‚·‚éH
+â€»changeãƒ¡ã‚½ãƒƒãƒ‰ã«è¨˜è¿°ã—ãŸå ´åˆã€rollbackã™ã‚‹ã¨ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹ã€‚up/downã«åˆ†ã‘ã¦è¨˜è¼‰ã™ã‚‹ï¼Ÿ
 
-### ƒ}ƒCƒOƒŒ[ƒVƒ‡ƒ“Às
+### ãƒã‚¤ã‚°ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œ
 `rails db:migrate`
 
-### Bookƒ‚ƒfƒ‹‚ÌŒp³Œ³‚ğProductƒ‚ƒfƒ‹‚É•ÏX
+### Bookãƒ¢ãƒ‡ãƒ«ã®ç¶™æ‰¿å…ƒã‚’Productãƒ¢ãƒ‡ãƒ«ã«å¤‰æ›´
 `class Book < ApplicationRecord`
-‚ğ
+ã‚’
 `class Book < Product`
-‚É•ÏXB
+ã«å¤‰æ›´ã€‚
 
-### Rspec‚ÌÀsiŠù‘¶ˆ—‚É‰e‹¿‚ªo‚Ä‚¢‚È‚¢‚±‚Æ‚ÌŠm”Fj
-¦Œ»“_‚Å‚ÍRspec“®‚©‚È‚¢
+`scope :visible, ->(){ where(showing: true) }`ã‚’Productãƒ¢ãƒ‡ãƒ«ã¸ç§»å‹•
 
-### Musicƒ‚ƒfƒ‹‚Ìì¬
+### Rspecã®å®Ÿè¡Œï¼ˆæ—¢å­˜å‡¦ç†ã«å½±éŸ¿ãŒå‡ºã¦ã„ãªã„ã“ã¨ã®ç¢ºèªï¼‰
+â€»TODO(kawabata):ç¾æ™‚ç‚¹ã§ã¯Rspecå‹•ã‹ãªã„ã€‚ãƒ†ã‚­ã‚¹ãƒˆä½œæˆæ™‚ã«è¦ç¢ºèª
+
+### Musicãƒ¢ãƒ‡ãƒ«ã®ä½œæˆ
 `rails g scaffold music`
 
 ```
@@ -94,9 +110,9 @@ invoke  scss
 create    app/assets/stylesheets/scaffolds.scss
 ```
 
-¦musicsƒe[ƒuƒ‹‚Íì¬‚µ‚È‚¢‚Ì‚ÅA`20161221002316_create_musics.rb`‚Ííœ
+â€»musicsãƒ†ãƒ¼ãƒ–ãƒ«ã¯ä½œæˆã—ãªã„ã®ã§ã€`20161221002316_create_musics.rb`ã¯å‰Šé™¤
 
-### productsƒe[ƒuƒ‹‚Émusic—pƒJƒ‰ƒ€’Ç‰Á
+### productsãƒ†ãƒ¼ãƒ–ãƒ«ã«musicç”¨ã‚«ãƒ©ãƒ è¿½åŠ 
 `rails g migration AddPlayTimeToProducts play_time:integer`
 
 ```
@@ -106,11 +122,11 @@ create  db/migrate/20161221003321_add_play_time_to_products.rb
 
 `rails db:migrate`
 
-### musics—p‚ÌŠÇ—‰æ–Êì¬
+### musicsç”¨ã®ç®¡ç†ç”»é¢ä½œæˆ
 
-#### musics_controller.rb‚Ì•ÏX
- - `before_action :authenticate_user!`‚Ì’Ç‰Á
- - `music_params`ƒƒ\ƒbƒh‚Ì•ÏX
+#### musics_controller.rbã®å¤‰æ›´
+ - `before_action :authenticate_user!`ã®è¿½åŠ 
+ - `music_params`ãƒ¡ã‚½ãƒƒãƒ‰ã®å¤‰æ›´
 
 ```
 def music_params
@@ -118,42 +134,41 @@ def music_params
 end
 ```
 
-#### music.rb‚Ì•ÏX
- - Œp³Œ³‚ğ`ApplicationRecord`‚©‚ç`Product`‚É•ÏX
- - `scope :visible, ->(){ where(showing: true) }`‚Ì’Ç‰Á
- - ƒ^ƒOü‚è‚Í•Û—¯
+#### music.rbã®å¤‰æ›´
+ - ç¶™æ‰¿å…ƒã‚’`ApplicationRecord`ã‹ã‚‰`Product`ã«å¤‰æ›´
+ - ã‚¿ã‚°å‘¨ã‚Šã¯ä¿ç•™
 
-#### view‚Ì•ÏX(index, _form, edit, new, show)
- - books‘¤‚ğQl‚É
- - author‚âpublished_on‚Í‚»‚Ì‚Ü‚Üg‚¤H
- - ƒ^ƒOü‚è‚Í•Û—¯
+#### viewã®å¤‰æ›´(index, _form, edit, new, show)
+ - bookså´ã‚’å‚è€ƒã«
+ - authorã‚„published_onã¯ãã®ã¾ã¾ä½¿ã†ï¼Ÿ
+ - ã‚¿ã‚°å‘¨ã‚Šã¯ä¿ç•™
 
-#### models.ja.yml‚Ì•ÏX
-author‚âpublished_on‚ğ‚»‚Ì‚Ü‚Üg‚¤‘O’ñ‚ÅB
+#### models.ja.ymlã®å¤‰æ›´
+authorã‚„published_onã‚’ãã®ã¾ã¾ä½¿ã†å‰æã§ã€‚
 
     music:
-      title: ƒ^ƒCƒgƒ‹
-      author: ƒA[ƒeƒBƒXƒg
-      published_on: ”­”„“ú
-      showing: ”­”„
-      price: ‰¿Ši
-      play_time: Ä¶ŠÔ
+      title: ã‚¿ã‚¤ãƒˆãƒ«
+      author: ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+      published_on: ç™ºå£²æ—¥
+      showing: ç™ºå£²
+      price: ä¾¡æ ¼
+      play_time: å†ç”Ÿæ™‚é–“
 
-### ‰ïˆõ—pTOPƒy[ƒW‚ÉMusic‚ğ•\¦
-#### products_controller.rb‚Ì•ÏX
-`index`ƒƒ\ƒbƒh‚É`@musics = Music.visible.all`‚ğ’Ç‰Á
+### ä¼šå“¡ç”¨TOPãƒšãƒ¼ã‚¸ã«Musicã‚’è¡¨ç¤º
+#### products_controller.rbã®å¤‰æ›´
+`index`ãƒ¡ã‚½ãƒƒãƒ‰ã«`@musics = Music.visible.all`ã‚’è¿½åŠ 
 
-#### products/index.html.erb‚Ì•ÏX
- - book‚Æ“¯‚¶‚æ‚¤‚Émusic‚ğ•\¦‚·‚é
- - book‚Æmusic‚Ì•\¦ŠJnˆÊ’u‚É‚»‚ê‚¼‚êA`BOOK`,`MUSIC`‚ğ•\¦‚·‚é
+#### products/index.html.erbã®å¤‰æ›´
+ - bookã¨åŒã˜ã‚ˆã†ã«musicã‚’è¡¨ç¤ºã™ã‚‹
+ - bookã¨musicã®è¡¨ç¤ºé–‹å§‹ä½ç½®ã«ãã‚Œãã‚Œã€`BOOK`,`MUSIC`ã‚’è¡¨ç¤ºã™ã‚‹
 
-### ƒTƒCƒhƒƒjƒ…[‚ÉMusics’Ç‰Á
-`layouts/application.html.erb`‚Ì•ÏX
+### ã‚µã‚¤ãƒ‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«Musicsè¿½åŠ 
+`layouts/application.html.erb`ã®å¤‰æ›´
 
 ```
 <li class="<%= active_class('musics') %>"><%= link_to 'Musics', musics_path %></li>
 ```
 
-### music—p‚Ìspecì¬
-book‘¤‚ğQl‚ÉC³
+### musicç”¨ã®specä½œæˆ
+bookå´ã‚’å‚è€ƒã«ä¿®æ­£
 

@@ -1,5 +1,5 @@
 class CreateProducts < ActiveRecord::Migration[5.0]
-  def change
+  def up
     create_table :products do |t|
       t.string :type
       t.string :title
@@ -17,5 +17,9 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       product.type = 'Book'
       product.save
     end
+  end
+  
+  def down
+    drop_table :products  
   end
 end
