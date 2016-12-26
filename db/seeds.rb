@@ -27,6 +27,12 @@ CSV.foreach('db/books.csv', headers: :first_row) do |row|
   end
 end
 
+CSV.foreach('db/musics.csv', headers: :first_row) do |row|
+  music              = Music.find_or_create_by(title: row['title'], author: row['author'], price: row['price'], play_time: row['play_time'], showing: row['showing'])
+  music.published_on = Date.parse(row['published_on'])
+  music.save
+end
+
 admin = User.where(email: 'test@example.com')
 unless admin.present?
   User.create(name: 'Admin', email: 'test@example.com', password: 'monka_project', password_confirmation: 'monka_project', role: 'admin')

@@ -130,6 +130,9 @@ create  db/migrate/20161221003321_add_play_time_to_products.rb
 
 `rails db:migrate`
 
+### musicsのseedファイルを作成
+
+
 ### musics用の管理画面作成
 
 #### musics_controller.rbの変更
