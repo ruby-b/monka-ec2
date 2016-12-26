@@ -44,9 +44,17 @@ up/downに分けて記載する
 
 20161221002132_drop_table_books.rbにテーブル削除処理を記述
 
-    def change
-      drop_table :books
-    end
+```
+def change
+  drop_table :books do |t|
+    t.string :title
+    t.string :author
+    t.date :published_on
+    t.boolean :showing, default: false
+    t.timestamps
+  end
+end
+```
 
 ※changeメソッドに記述した場合、rollbackするとエラーになる。up/downに分けて記載する？
 
