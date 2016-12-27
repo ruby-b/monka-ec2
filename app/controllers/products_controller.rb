@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   
 private
   
-  def set_book
+  def set_product
     @product = Product.find(params[:id])
   end
     

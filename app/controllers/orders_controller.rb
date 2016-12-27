@@ -29,8 +29,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(user_id: order_params[:user_id], shipping_address: order_params[:shipping_address])
-    @order.build_order_detail(product_id: order_params[:product_id])
-    @order.save
+    @order.checkout(order_params[:product_id])
     
     respond_to do |format|
       format.html { redirect_to order_path(@order), notice: 'Order was successfully created.' }
