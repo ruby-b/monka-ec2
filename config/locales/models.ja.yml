@@ -22,8 +22,15 @@ ja:
         play_time: 再生時間
       order:
         shipping_address: 配送先
+        status: 状況
       tag:
         name: タグ名
       tagging:
         book_id: 本
         tag_id: タグ
+    enum:
+      order:
+        status:
+          order_accepted: 注文受付
+          paid: 入金済み
+          delivered: 配送済み
