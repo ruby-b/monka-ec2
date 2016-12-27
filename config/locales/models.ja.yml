@@ -20,9 +20,10 @@ ja:
         author: アーティスト
         published_on: 発売日
         play_time: 再生時間
+      order:
+        shipping_address: 配送先
       tag:
         name: タグ名
       tagging:
         book_id: 本
         tag_id: タグ
-

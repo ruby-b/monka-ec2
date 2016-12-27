@@ -9,177 +9,179 @@ $ rails db:seed
 $ RAILS_ENV=test rails db:migrate
 $ RAILS_ENV=test rails db:seed
 ```
-
-# README
-
-### Productモデルの作成
-
-`rails g model product type:string title:string author:string published_on:date showing:boolean price:integer`
-
-    invoke  active_record
-    create    db/migrate/20161221002055_create_products.rb
-    create    app/models/product.rb
-    invoke    rspec
-    create    spec/models/product_spec.rb
-
-up/downに分けて記載する
-
-### books⇒productsへのデータ移行処理
-
-20161221002055_create_products.rbにデータ移行処理を記述
-
-    books = Book.all
-    books.each do |book|
-      product = Product.new(book.attributes)
-      product.type = 'Book'
-      product.save
-    end
-
-### booksテーブル削除
-
-`rails g migration drop_table_books`
-
-    invoke  active_record
-    create  db/migrate/20161221002132_drop_table_books.rb
-
-20161221002132_drop_table_books.rbにテーブル削除処理を記述
-
-```
-def change
-  drop_table :books do |t|
-    t.string :title
-    t.string :author
-    t.date :published_on
-    t.boolean :showing, default: false
-    t.timestamps
-  end
-end
-```
-
-※changeメソッドに記述した場合、rollbackするとエラーになる。up/downに分けて記載する？
-
-### マイグレーション実行
-`rails db:migrate`
-
-### Bookモデルの継承元をProductモデルに変更
-`class Book < ApplicationRecord`
-を
-`class Book < Product`
-に変更。
-
-`scope :visible, ->(){ where(showing: true) }`をProductモデルへ移動
-
-### Rspecの実行（既存処理に影響が出ていないことの確認）
-※TODO(kawabata):現時点ではRspec動かない。テキスト作成時に要確認
-
-### Musicモデルの作成
-`rails g scaffold music`
+### Orderモデルの作成
+`rails g scaffold order user:belongs_to`
 
 ```
 invoke  active_record
-create   db/migrate/20161221002316_create_musics.rb
-create   app/models/music.rb
-invoke   rspec
-create    spec/models/music_spec.rb
-invoke  resource_route
-route    resources :musics
-invoke  scaffold_controller
-create    app/controllers/musics_controller.rb
-invoke    erb
-create      app/views/musics
-create      app/views/musics/index.html.erb
-create      app/views/musics/edit.html.erb
-create      app/views/musics/show.html.erb
-create      app/views/musics/new.html.erb
-create      app/views/musics/_form.html.erb
+create    db/migrate/20161221055428_create_orders.rb
+create    app/models/order.rb
 invoke    rspec
-create      spec/controllers/musics_controller_spec.rb
-create      spec/views/musics/edit.html.erb_spec.rb
-create      spec/views/musics/index.html.erb_spec.rb
-create      spec/views/musics/new.html.erb_spec.rb
-create      spec/views/musics/show.html.erb_spec.rb
-create      spec/routing/musics_routing_spec.rb
+create      spec/models/order_spec.rb
+invoke  resource_route
+ route    resources :orders
+invoke  scaffold_controller
+create    app/controllers/orders_controller.rb
+invoke    erb
+create      app/views/orders
+create      app/views/orders/index.html.erb
+create      app/views/orders/edit.html.erb
+create      app/views/orders/show.html.erb
+create      app/views/orders/new.html.erb
+create      app/views/orders/_form.html.erb
+invoke    rspec
+create      spec/controllers/orders_controller_spec.rb
+create      spec/views/orders/edit.html.erb_spec.rb
+create      spec/views/orders/index.html.erb_spec.rb
+create      spec/views/orders/new.html.erb_spec.rb
+create      spec/views/orders/show.html.erb_spec.rb
+create      spec/routing/orders_routing_spec.rb
 invoke      rspec
-create        spec/requests/musics_spec.rb
+create        spec/requests/orders_spec.rb
 invoke    helper
-create      app/helpers/musics_helper.rb
+create      app/helpers/orders_helper.rb
 invoke      rspec
-create        spec/helpers/musics_helper_spec.rb
+create        spec/helpers/orders_helper_spec.rb
 invoke    jbuilder
-create      app/views/musics/index.json.jbuilder
-create      app/views/musics/show.json.jbuilder
-create      app/views/musics/_music.json.jbuilder
+create      app/views/orders/index.json.jbuilder
+create      app/views/orders/show.json.jbuilder
+create      app/views/orders/_order.json.jbuilder
 invoke  assets
 invoke    coffee
-create      app/assets/javascripts/musics.coffee
+create      app/assets/javascripts/orders.coffee
 invoke    scss
-create      app/assets/stylesheets/musics.scss
+create      app/assets/stylesheets/orders.scss
 invoke  scss
-create    app/assets/stylesheets/scaffolds.scss
 ```
 
-※musicsテーブルは作成しないので、`20161221002316_create_musics.rb`は削除
+`20161221055428_create_orders.rb`に`t.string :shipping_address`を追加  
+⇒最初にコマンドで指定する
+※名前とメールアドレスはどうする？ログイン前提でよいか？
 
-### productsテーブルにmusic用カラム追加
-`rails g migration AddPlayTimeToProducts play_time:integer`
+### OrderDetailモデルの作成
+`rails g model order_detail order:belongs_to product:belongs_to`
 
 ```
 invoke  active_record
-create  db/migrate/20161221003321_add_play_time_to_products.rb
+create    db/migrate/20161221060004_create_order_details.rb
+create    app/models/order_detail.rb
+invoke    rspec
+create      spec/models/order_detail_spec.rb
 ```
 
 `rails db:migrate`
 
-### musicsのseedファイルを作成
+`order.rb`に`has_one :order_detail`を追加
+
+### 注文画面作成
+#### routes.rbの変更
+変更前
+```
+resources :orders
+```
+
+変更後
+```
+resources :orders, only: [:new, :create, :show]
+```
+
+#### 一覧に商品詳細ボタンを追加
+`products/index.html.erb`
+
+#### 商品詳細画面を追加(購入ボタンを追加)
+`products/show.html.erb`
+
+`routes.rb`を変更
+
+変更前
+`get 'products/index'`
+
+変更後
+`resources :products, only:[:index, :show]`
 
 
-### musics用の管理画面作成
-
-#### musics_controller.rbの変更
- - `before_action :authenticate_user!`の追加
- - `music_params`メソッドの変更
+#### models.ja.ymlの変更
+以下を追加。
 
 ```
-def music_params
-  params.require(:music).permit(:title, :author, :published_on, :showing, :price, :play_time)
+order:
+  shipping_address: 配送先
+```
+
+#### orders_controller.rbの変更
+
+```
+def new
+  @order = Order.new
+  @product = Product.find(params[:product_id])
+  render layout: 'front'
+end
+
+def create
+  ActiveRecord::Base.transaction do
+    @order = Order.create(user_id: order_params[:user_id], shipping_address: order_params[:shipping_address])
+    @order_detail = OrderDetail.new(product_id: order_params[:product_id])
+    @order_detail.order_id = @order.id
+    @order_detail.save
+  end
+
+  respond_to do |format|
+    format.html { redirect_to order_path(@order), notice: 'Order was successfully created.' }
+    format.json { render :show, status: :created, location: @order }
+  end
+rescue
+  respond_to do |format|
+    format.html { render :new }
+    format.json { render json: @order.errors, status: :unprocessable_entity }
+  end
+end
+
+def order_params
+  params.require(:order).permit(:user_id, :product_id, :shipping_address)
 end
 ```
 
-#### music.rbの変更
- - 継承元を`ApplicationRecord`から`Product`に変更
- - タグ周りは保留
+#### Orderのビュー変更(new, _form, show)
 
-#### viewの変更(index, _form, edit, new, show)
- - books側を参考に
- - authorやpublished_onはそのまま使う？
- - タグ周りは保留
+### メール送信機能追加
 
-#### models.ja.ymlの変更
-authorやpublished_onをそのまま使う前提で。
+#### Mailerの作成
 
-    music:
-      title: タイトル
-      author: アーティスト
-      published_on: 発売日
-      showing: 発売
-      price: 価格
-      play_time: 再生時間
-
-### 会員用TOPページにMusicを表示
-#### products_controller.rbの変更
-`index`メソッドに`@musics = Music.visible.all`を追加
-
-#### products/index.html.erbの変更
- - bookと同じようにmusicを表示する
- - bookとmusicの表示開始位置にそれぞれ、`BOOK`,`MUSIC`を表示する
-
-### サイドメニューにMusics追加
-`layouts/application.html.erb`の変更
+`rails g mailer OrderMailer completed_mail`
 
 ```
-<li class="<%= active_class('musics') %>"><%= link_to 'Musics', musics_path %></li>
+create  app/mailers/order_mailer.rb
+invoke  erb
+create    app/views/order_mailer
+create    app/views/order_mailer/completed_mail.text.erb
+create    app/views/order_mailer/completed_mail.html.erb
+invoke  rspec
+create    spec/mailers/order_mailer_spec.rb
+create    spec/fixtures/order_mailer/completed_mail
+create    spec/mailers/previews/order_mailer_preview.rb
 ```
 
-### music用のspec作成
-book側を参考に修正
+#### メール文章作成
+`completed_mail.text.erb`と`completed_mail.html.erb`にメール本文作成
 
+#### メール送信処理作成
+`order_mailer.rb`の`completed_mail`に送信処理を作成
+
+#### メール送信設定
+TODO(kawabata):SendGridのアカウント取得できたら試す。
+
+```
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  enable_starttls_auto: true,
+  address: '<SMTPアドレス>',
+  port: '587',
+  domain: '<ドメイン>',
+  authentication: 'plain',
+  user_name: '<ユーザー名>',
+  password: '<パスワード>',
+}
+```
+
+#### Mailerの呼び出し
+ordersとorder_detailsの登録後にメールを送信する。

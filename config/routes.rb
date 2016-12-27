@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :orders, only: [:new, :create, :show]
   resources :musics
-  get 'products/index'
+  resources :products, only: [:index, :show]
   get 'about', to: 'products#about'
 
   devise_for :users
