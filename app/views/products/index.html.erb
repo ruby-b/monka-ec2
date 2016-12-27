@@ -11,7 +11,7 @@
       <h3><%= book.title %></h3>
       <p><%= book.author %></p>
       <p><%= book.published_on %></p>
-      <p><%= number_to_currency(book.try(:price), precision: 0, unit: "円") %><%= link_to '商品詳細', product_path(book), class: 'btn btn-default' %></p>
+      <p><%= number_to_currency(book.try(:price), precision: 0, unit: "円") %><%= link_to '購入', new_order_path(product_id: book.id), class: 'btn btn-default' %></p>
     <% end %>
   </div>
 </div>
@@ -24,7 +24,7 @@
       <p><%= music.author %></p>
       <p><%= music.published_on %></p>
       <p><%= music.play_time %> 分</p>
-      <p><%= number_to_currency(music.try(:price), precision: 0, unit: "円") %><%= link_to '商品詳細', product_path(music), class: 'btn btn-default' %></p>
+      <p><%= number_to_currency(music.try(:price), precision: 0, unit: "円") %><%= link_to '購入', new_order_path(product_id: music.id), class: 'btn btn-default' %></p>
     <% end %>
   </div>
 </div>
