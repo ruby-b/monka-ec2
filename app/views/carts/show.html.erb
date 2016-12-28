@@ -1,0 +1,23 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+ 
+<h2 class="sub-header">カート</h2>
+<table class="table-striped table">
+  <% @cart.line_items.each do |item| %>
+    <tr>
+      <td><%= item.product.title %></td>
+      <td>&times;<%= item.quantity %></td>
+      <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+    </tr>
+  <% end %>
+ 
+  <tr>
+    <td colspan="2">合計</td>
+    <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
+  </tr>
+</table>
+
+<%= link_to '購入を続ける', products_index_path, class: 'btn btn-default' %>
+<%= link_to '購入する', new_order_path, class: 'btn btn-default' %>
+<%= link_to 'カートを空にする', cart_path(id: @cart.id), method: :delete, class: 'btn btn-default' %>

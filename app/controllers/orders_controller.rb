@@ -16,8 +16,12 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
+    @cart = current_cart
+    if @cart.line_items.empty?
+      redirect_to products_index_url
+      return
+    end
     @order = Order.new
-    @product = Product.find(params[:product_id])
     render layout: 'front'
   end
 
@@ -28,10 +32,13 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    @cart = current_cart
     @order = Order.new(user_id: order_params[:user_id], shipping_address: order_params[:shipping_address])
-    @order.checkout(order_params[:product_id])
+    @order.checkout(@cart)
     
     respond_to do |format|
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
       format.html { redirect_to products_index_url, notice: 'Order was successfully created.' }
       format.json { render :show, status: :created, location: @order }
     end

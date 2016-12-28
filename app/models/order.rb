@@ -21,8 +21,12 @@ class Order < ApplicationRecord
   has_one :order_detail
   after_commit :send_order_mail, on: :create
   
-  def checkout(product_id)
-    build_order_detail(product_id: product_id)
+  def checkout(cart)
+    cart.line_items.each do |line_item|
+      line_item.quantity.times do |_i| 
+        build_order_detail(product_id: line_item.product_id)
+      end
+    end
     save!
   end
   
@@ -33,4 +37,3 @@ private
   end
   
 end
-
