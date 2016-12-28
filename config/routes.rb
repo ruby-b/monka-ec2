@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders, only: [:new, :create, :show]
+  resources :orders, only: [:new, :create]
   resources :musics
   resources :orders_management, only: [:index, :edit] do
     put :confirm_payment
