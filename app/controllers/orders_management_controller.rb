@@ -12,7 +12,7 @@ class OrdersManagementController < ApplicationController
   def confirm_payment
     respond_to do |format|
       if @order.confirm_payment!
-        format.html { redirect_to orders_management_index_path, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_management_index_url, notice: 'Order was successfully updated.' }
         format.json { render :index, status: :ok, location: orders_management_index_path }
       else
         format.html { render :edit }
@@ -24,7 +24,7 @@ class OrdersManagementController < ApplicationController
   def deliver
     respond_to do |format|
       if @order.deliver!
-        format.html { redirect_to orders_management_index_path, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_management_index_url, notice: 'Order was successfully updated.' }
         format.json { render :index, status: :ok, location: orders_management_index_path }
       else
         format.html { render :edit }
@@ -36,7 +36,7 @@ class OrdersManagementController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to orders_management_index_path, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_management_index_url, notice: 'Order was successfully updated.' }
         format.json { render :index, status: :ok, location: orders_management_index_path }
       else
         format.html { render :edit }
