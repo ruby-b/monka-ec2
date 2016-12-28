@@ -23,9 +23,7 @@ class Order < ApplicationRecord
   
   def checkout(cart)
     cart.line_items.each do |line_item|
-      line_item.quantity.times do |_i| 
-        build_order_detail(product_id: line_item.product_id)
-      end
+      build_order_detail(product_id: line_item.product_id, quantity: line_item.quantity)
     end
     save!
   end

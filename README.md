@@ -127,7 +127,7 @@ class CreateLineItems < ActiveRecord::Migration[5.0]
       t.references :product, foreign_key: true
       t.references :cart, foreign_key: true
       # 初期値を追加設定
-      t.integer :quantity, default:1
+      t.integer :quantity, default:0
 
       t.timestamps
     end
@@ -163,12 +163,8 @@ end
  - カート合計個数集計機能追加の編集を行う
 ```
   def add_product(product_id)
-    current_item = line_items.find_by_product_id(product_id)
-    if current_item
-      current_item.quantity += 1
-    else
-      current_item = line_items.build(:product_id => product_id)
-    end
+    current_item = line_items.find_or_create_by(id: product_id)
+    current_item.quantity += 1
     current_item
   end
 
@@ -342,6 +338,13 @@ end
 ```
 
 ### カートからの購入機能を変更登録
+
+##### orders_detailテーブルに個数のカラム追加
+`rails g migration AddQuantityToOrderDetails quantity:integer`
+
+### マイグレーション実行
+`rails db:migrate`
+
 ##### app/models/order.rbを編集を編集
  - カートから複数明細の登録を行うように編集を行う
 ```
@@ -370,9 +373,7 @@ class Order < ApplicationRecord
   
   def checkout(cart)
     cart.line_items.each do |line_item|
-      line_item.quantity.times do |_i| 
-        build_order_detail(product_id: line_item.product_id)
-      end
+      build_order_detail(product_id: line_item.product_id, quantity: line_item.quantity)
     end
     save!
   end
