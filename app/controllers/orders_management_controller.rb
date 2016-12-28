@@ -1,6 +1,6 @@
 class OrdersManagementController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:edit, :confirm_payment, :deliver]
+  before_action :set_order, only: [:edit, :confirm_payment, :deliver, :async_confirm_payment, :async_deliver]
   
   def index
     conditions = params[:q] || { status_in: Order.statuses.values }
@@ -33,6 +33,18 @@ class OrdersManagementController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def async_confirm_payment
+    @order.confirm_payment!
+    
+    render template: "orders_management/async_process"
+  end
+  
+  def async_deliver
+    @order.deliver!
+
+    render template: "orders_management/async_process"
   end
   
   def update

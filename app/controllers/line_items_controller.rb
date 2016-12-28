@@ -62,6 +62,14 @@ class LineItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def add_cart_item
+    @cart              = current_cart
+    product            = Product.find(params[:id])
+    @line_item         = @cart.add_product(product.id)
+    @line_item.product = product
+    @line_item.save
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
