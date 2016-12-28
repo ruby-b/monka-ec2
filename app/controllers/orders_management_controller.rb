@@ -3,7 +3,9 @@ class OrdersManagementController < ApplicationController
   before_action :set_order, only: [:edit, :confirm_payment, :deliver]
   
   def index
-    @orders = Order.all  
+    conditions = params[:q] || { status_in: Order.statuses.values }
+    @order     = Order.ransack(conditions)
+    @orders    = @order.result.includes(:user).to_a.uniq
   end
   
   def edit
