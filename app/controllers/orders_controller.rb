@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
     @order.checkout(@cart)
     
     respond_to do |format|
-      Cart.destroy(session[:cart_id])
+      @cart.destroy
       session[:cart_id] = nil
       format.html { redirect_to products_index_url, notice: 'Order was successfully created.' }
       format.json { render :show, status: :created, location: @order }
