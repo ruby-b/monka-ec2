@@ -1,20 +1,9 @@
-<% if notice %>
-  <div class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <p id="notice"><%= notice %></p>
-  </div>
-<% end %>
-
-<h2 class="sub-header">注文情報</h2>
+<p id="notice"><%= notice %></p>
 
 <p>
-  <strong>タイトル:</strong>
-  <%= @order.order_detail.product.title %>
+  <strong>User:</strong>
+  <%= @order.user %>
 </p>
 
-<p>
-  <strong>金額:</strong>
-  <%= @order.order_detail.product.price %>
-</p>
-
-<%= link_to '戻る', products_index_path, class: 'btn btn-default' %>
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     @order.checkout(order_params[:product_id])
     
     respond_to do |format|
-      format.html { redirect_to order_path(@order), notice: 'Order was successfully created.' }
+      format.html { redirect_to products_index_path, notice: 'Order was successfully created.' }
       format.json { render :show, status: :created, location: @order }
     end
   rescue
