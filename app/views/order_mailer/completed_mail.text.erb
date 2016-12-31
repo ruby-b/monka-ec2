@@ -4,9 +4,17 @@
 下記の内容で注文を承りました。
 
 -------------------------------------------------------
-タイトル：<%= @order.order_detail.product.title %>
+<% @order.order_details.each do |item| %>
+タイトル：<%= item.product.title %>
 
-金額：<%= @order.order_detail.product.price %> 円
+金額：<%= item.product.price %> 円
+
+個数：<%= item.quantity %> 個
+
+小計金額：<%= item.total_price %> 円
+-------------------------------------------------------
+<% end %>
+合計金額：<%= @order.total_price %> 円
 
 お届け先：<%= @order.shipping_address %>
 -------------------------------------------------------
