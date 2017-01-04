@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :musics
   get 'products/index'
   get 'about', to: 'products#about'
 

@@ -5,12 +5,26 @@
 </div>
 
 <div class="row marketing">
+  <h2>BOOK</h2>
   <div class="col-lg-12">
     <% @books.each do |book| %>
       <h3><%= book.title %></h3>
       <p><%= book.author %></p>
       <p><%= book.published_on %></p>
       <p><%= number_to_currency(book.try(:price), precision: 0, unit: "円") %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row marketing">
+  <h2>MUSIC</h2>
+  <div class="col-lg-12">
+    <% @musics.each do |music| %>
+      <h3><%= music.title %></h3>
+      <p><%= music.author %></p>
+      <p><%= music.published_on %></p>
+      <p><%= music.play_time %> 分</p>
+      <p><%= number_to_currency(music.try(:price), precision: 0, unit: "円") %></p>
     <% end %>
   </div>
 </div>
