@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :orders, only: [:new, :create]
   resources :musics
+  resources :orders_management, only: [:index, :edit] do
+    put :confirm_payment
+    put :deliver
+  end
   get 'products/index'
   get 'about', to: 'products#about'
 

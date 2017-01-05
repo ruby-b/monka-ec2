@@ -1,0 +1,44 @@
+<% if order.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+    <ul>
+    <% order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2 class="sub-header">注文内容</h2>
+
+<p>
+  <strong>タイトル：</strong>
+  <%= order.order_detail.product.title %>
+</p>
+
+<p>
+  <strong>金額：</strong>
+   <%= number_to_currency(order.order_detail.product.try(:price), precision: 0, unit: "円") %>
+</p>
+
+<p>
+  <strong>氏名：</strong>
+  <%= order.user.name %>
+</p>
+
+<p>
+  <strong>メールアドレス：</strong>
+  <%= order.user.email %>
+</p>
+
+<p>
+  <strong>状況</strong>
+  <%= I18n.t order.status, scope: 'activerecord.enum.order.status' %>
+</p>
+
+<% if order.order_accepted? %>
+  <%= button_to '入金確認', orders_management_confirm_payment_path(order.id), params: { id: order.id }, method: :put, class: 'btn btn-default' %>
+<% elsif order.paid? %>
+  <%= button_to '配送', orders_management_deliver_path(order.id), params: { id: order.id }, method: :put, class: 'btn btn-default' %>
+<% end %>
