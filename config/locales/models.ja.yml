@@ -13,6 +13,8 @@ ja:
         title: タイトル
         showing: 発売
         price: 価格
+        author: 著者
+        while: ～
       book:
         author: 著者
         published_on: 出版日
@@ -23,6 +25,7 @@ ja:
       order:
         shipping_address: 配送先
         status: 状況
+        user_id: ユーザ名
       tag:
         name: タグ名
       tagging:
