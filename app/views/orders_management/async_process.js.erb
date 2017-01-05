@@ -1,0 +1,15 @@
+var targetStatus = $("#order_table tbody tr#" + "<%= @order.id %>" + " td.status");
+var targetLink   = $("#order_table tbody tr#" + "<%= @order.id %>" + " td.link");
+var link;
+
+$(targetStatus).html("<%= I18n.t @order.status, scope: 'activerecord.enum.order.status' %>");
+
+<% if @order.order_accepted? %>
+  link = '<%= link_to "入金確認", async_confirm_payment_orders_management_path(@order), remote: true, method: :post, class: "btn btn-default" %>';
+<% elsif @order.paid? %>
+  link = '<%= link_to "配送", async_deliver_orders_management_path(@order), remote: true, method: :post, class: "btn btn-default" %>';
+<% else %>
+  link = '';
+<% end %>
+
+$(targetLink).html(link);

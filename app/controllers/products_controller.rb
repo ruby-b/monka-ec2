@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   
   def index
+    @cart = current_cart
     @product  = Product.ransack(params[:q])
     products  = @product.result.visible
     @books    = products.books

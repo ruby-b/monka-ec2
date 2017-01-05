@@ -5,6 +5,7 @@
   </div>
 <% end %>
 
+<%= javascript_include_tag "line_items" %>
 <div class="jumbotron">
   <h1>F-B Shop</h1>
   <p class="lead">This site is the test shop of my favorite books.</p>
@@ -66,7 +67,12 @@
       <h3><%= book.title %></h3>
       <p><%= book.author %></p>
       <p><%= book.published_on %></p>
-      <p><%= number_to_currency(book.try(:price), precision: 0, unit: "円") %><%= link_to 'カートに入れる', line_items_path(product_id: book.id), method: :post, class: 'btn btn-default' %></p>
+      <p>
+        <%= number_to_currency(book.try(:price), precision: 0, unit: "円") %>
+        <%= link_to "カート追加", "#",
+          class:   "btn btn-default",
+          onclick: "return add_cart_item(#{book.id});"%>
+      </p>
     <% end %>
   </div>
 </div>
@@ -79,7 +85,12 @@
       <p><%= music.author %></p>
       <p><%= music.published_on %></p>
       <p><%= music.play_time %> 分</p>
-      <p><%= number_to_currency(music.try(:price), precision: 0, unit: "円") %><%= link_to 'カートに入れる', line_items_path(product_id: music.id), method: :post, class: 'btn btn-default' %></p>
+      <p>
+        <%= number_to_currency(music.try(:price), precision: 0, unit: "円") %>
+        <%= link_to "カート追加", "#",
+          class:   "btn btn-default",
+          onclick: "return add_cart_item(#{music.id});"%>
+      </p>
     <% end %>
   </div>
 </div>

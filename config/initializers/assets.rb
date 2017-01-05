@@ -11,3 +11,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( front.css )
 Rails.application.config.assets.precompile += %w( front.js )
+Rails.application.config.assets.precompile += %w( line_items.js )
+Rails.application.config.assets.precompile += %w( orders_management.js )
