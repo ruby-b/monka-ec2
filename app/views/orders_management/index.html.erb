@@ -53,6 +53,7 @@
       <tr>
         <th>購入者</th>
         <th>送付先</th>
+        <th>個数</th>
         <th>金額</th>
         <th>状態</th>
         <th></th>
@@ -64,7 +65,8 @@
         <tr id="<%= order.id %>">
           <td><%= order.user.name %></td>
           <td><%= order.shipping_address %></td>
-          <td><%= order.order_detail.product.price %></td>
+          <td><%= order.total_number %></td>
+          <td><%= order.total_price %></td>
           <td class="status">
             <%= I18n.t order.status, scope: 'activerecord.enum.order.status' %>
           </td>

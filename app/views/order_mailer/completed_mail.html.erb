@@ -7,7 +7,14 @@
 </p>
 
 <ul>
-    <li>タイトル：<%= @order.order_detail.product.title %></li>
-    <li>金額：<%= @order.order_detail.product.price %> 円</li>
-    <li>お届け先：<%= @order.shipping_address %></li>
+  <% @order.order_details.each do |item| %>
+    <li>タイトル：<%= item.product.title %></li>
+    <li>金額：<%= item.product.price %> 円</li>
+    <li>－－－－－－－－－－－－－－－－－</li>
+    <li>個数：<%= item.quantity %> 個</li>
+    <li>小計金額：<%= item.total_price %> 円</li>
+    <li>－－－－－－－－－－－－－－－－－</li>
+  <% end %>
+  <li>合計金額：<%= @order.total_price %> 円</li>
+  <li>お届け先：<%= @order.shipping_address %></li>
 </ul>
