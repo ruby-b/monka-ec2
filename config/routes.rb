@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders, only: [:new, :create]
   resources :musics
   get 'products/index'
   get 'about', to: 'products#about'

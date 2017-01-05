@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  
   def index
     @books = Book.visible.all
     @musics = Music.visible.all
@@ -8,4 +9,5 @@ class ProductsController < ApplicationController
   def about
     render layout: 'front'
   end
+
 end

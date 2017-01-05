@@ -1,0 +1,49 @@
+<%= form_for(order) do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2 class="sub-header">商品</h2>
+
+  <p>
+    <strong>タイトル：</strong>
+    <%= product.title %>
+  </p>
+  
+  <p>
+    <strong>金額：</strong>
+     <%= number_to_currency(product.try(:price), precision: 0, unit: "円") %>
+  </p>
+
+  <h2 class="sub-header">お客様情報</h2>
+  
+  <p>
+    <strong>氏名：</strong>
+    <%= current_user.name %>
+  </p>
+  
+  <p>
+    <strong>メールアドレス：</strong>
+    <%= current_user.email %>
+  </p>
+  
+  <div class="form-group">
+    <%= f.label :shipping_address %>
+    <%= f.text_field :shipping_address, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :product_id, value: product.id %>
+
+  <div class="actions">
+    <%= f.submit '購入確定', class: "btn btn-default", data: { confirm: 'この内容で購入してもよろしいですか？' } %>
+  </div>
+<% end %>

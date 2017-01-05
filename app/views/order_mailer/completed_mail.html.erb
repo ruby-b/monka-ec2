@@ -1,0 +1,13 @@
+<h3><%= @order.user.name %> 様</h3>
+
+<p>
+  ご注文ありがとうございます。
+  <br>
+  下記の内容で注文を承りました。
+</p>
+
+<ul>
+    <li>タイトル：<%= @order.order_detail.product.title %></li>
+    <li>金額：<%= @order.order_detail.product.price %> 円</li>
+    <li>お届け先：<%= @order.shipping_address %></li>
+</ul>
