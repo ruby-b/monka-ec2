@@ -1,7 +1,7 @@
 <h1>商品購入</h1>
 
-<%= render 'form', order: @order, product: @product %>
+<%= render 'form', order: @order, cart: @cart %>
 
 <br>
 
-<%= link_to '戻る', products_index_path, class: 'btn btn-default'  %>
+<%= link_to '戻る', cart_path(id: session[:cart_id]), class: 'btn btn-default'  %>
