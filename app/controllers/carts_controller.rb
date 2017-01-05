@@ -10,13 +10,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    begin
-      @cart = Cart.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to carts_url, notice: 'Invalid cart'
-    else
-      render layout: 'front'
-    end
+    render layout: 'front'
   end
   
   # GET /carts/new
